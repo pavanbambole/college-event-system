@@ -222,6 +222,9 @@ graph TD
     D --> E
     E --> F
     F --> G
+    D --> E
+    E --> F
+    F --> 
 
 # 📂 Project Structure
 
@@ -288,6 +291,4 @@ S-B-JAIN-College-Event-Management-System/
 ├── DOCUMENTATION.md
 ├── VIVA_QUESTIONS.md
 └── README.md
-D --> E
-E --> F
-F --> G
+
