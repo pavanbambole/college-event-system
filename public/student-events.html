@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Events – CampusConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="/index.html">
+        <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <span>Campus<span class="text-primary">Connect</span> <small class="badge bg-primary-subtle text-primary fs-7 ms-2">Student Portal</small></span>
+      </a>
+      <div class="d-flex align-items-center gap-3 ms-auto" id="navAuthSection"></div>
+    </div>
+  </nav>
+
+  <!-- Layout -->
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="p-3 bg-light rounded-3 mb-3 text-center border">
+        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-2 fw-bold" style="width: 48px; height: 48px;">
+          <i class="bi bi-person-fill fs-4"></i>
+        </div>
+        <h6 class="fw-bold mb-0" id="studentDisplayName">Student Name</h6>
+        <small class="text-muted" id="studentDisplayRoll">Roll Number</small>
+      </div>
+
+      <div class="sidebar-heading">Main Navigation</div>
+      <a href="/student-dashboard.html" class="sidebar-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="/student-events.html" class="sidebar-link active"><i class="bi bi-compass"></i> Discover Events</a>
+      <a href="/my-registrations.html" class="sidebar-link"><i class="bi bi-ticket-perforated"></i> My Registrations</a>
+      <a href="/event-history.html" class="sidebar-link"><i class="bi bi-clock-history"></i> Event History</a>
+      <a href="/feedback.html" class="sidebar-link"><i class="bi bi-star"></i> Feedback & Reviews</a>
+
+      <div class="sidebar-heading">Account</div>
+      <a href="/student-profile.html" class="sidebar-link"><i class="bi bi-person-gear"></i> My Profile</a>
+      <a href="/settings.html" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a>
+      <a href="javascript:void(0)" onclick="auth.logout()" class="sidebar-link text-danger mt-auto"><i class="bi bi-box-arrow-right"></i> Logout</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Discover Campus Events</h3>
+            <p class="text-muted mb-0">Browse open college events and secure your spot with 1-click registration.</p>
+          </div>
+        </div>
+
+        <!-- Filters Row -->
+        <div class="card custom-card p-3 mb-4">
+          <div class="row g-2 align-items-center">
+            <div class="col-md-5">
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" id="portalSearchInput" class="form-control bg-light" placeholder="Search event, organizer, venue...">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <select id="portalCategoryFilter" class="form-select bg-light">
+                <option value="All">All Categories</option>
+                <option value="Technical">Technical</option>
+                <option value="Cultural">Cultural</option>
+                <option value="Sports">Sports</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Hackathon">Hackathon</option>
+                <option value="Competition">Competition</option>
+                <option value="Fest">Fest</option>
+              </select>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <span class="text-muted small" id="portalEventsCount">Showing events...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="row g-4" id="portalEventsGrid">
+          <div class="col-12 text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/student.js"></script>
+  <script>
+    let portalEvents = [];
+
+    async function loadStudentEventsBrowse() {
+      try {
+        const res = await api.events.getAll({ sortBy: 'upcoming' });
+        portalEvents = res.data;
+        renderPortalEvents(portalEvents);
+
+        document.getElementById('portalSearchInput').addEventListener('input', filterEvents);
+        document.getElementById('portalCategoryFilter').addEventListener('change', filterEvents);
+      } catch (err) {
+        showToast('Failed to load events', 'error');
+      }
+    }
+
+    function filterEvents() {
+      const q = document.getElementById('portalSearchInput').value.toLowerCase().trim();
+      const cat = document.getElementById('portalCategoryFilter').value;
+
+      const filtered = portalEvents.filter(e => {
+        const matchesQuery = !q || e.eventName.toLowerCase().includes(q) || e.organizer.toLowerCase().includes(q) || e.venue.toLowerCase().includes(q);
+        const matchesCat = cat === 'All' || (e.category && e.category.toLowerCase() === cat.toLowerCase());
+        return matchesQuery && matchesCat;
+      });
+
+      renderPortalEvents(filtered);
+    }
+
+    function renderPortalEvents(events) {
+      const container = document.getElementById('portalEventsGrid');
+      const countEl = document.getElementById('portalEventsCount');
+      if (countEl) countEl.innerText = `${events.length} Event${events.length === 1 ? '' : 's'} available`;
+
+      if (!events || events.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center py-5 text-muted"><i class="bi bi-calendar-x fs-1 d-block mb-2"></i>No matching events found.</div>`;
+        return;
+      }
+
+      container.innerHTML = events.map(e => `
+        <div class="col-md-6 col-lg-4">
+          <div class="card custom-card h-100 d-flex flex-column">
+            <div class="card-img-wrapper">
+              <img src="${e.eventImage || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'}" alt="${e.eventName}">
+              <div class="card-img-badge">${getStatusBadge(e.eventStatus)}</div>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                ${getCategoryBadge(e.category)}
+                <span class="small text-muted"><i class="bi bi-calendar-event me-1"></i>${formatDate(e.date)}</span>
+              </div>
+              <h5 class="card-title fw-bold mb-2">${e.eventName}</h5>
+              <p class="card-text small text-muted flex-grow-1" style="max-height: 48px; overflow: hidden;">${e.description}</p>
+              
+              <div class="d-flex justify-content-between align-items-center small text-muted pt-2 mt-3 border-top">
+                <span><i class="bi bi-geo-alt me-1"></i>${e.venue}</span>
+                <span><i class="bi bi-people me-1"></i>${e.currentRegistrations || 0}/${e.maxCapacity}</span>
+              </div>
+
+              <div class="d-flex gap-2 mt-3">
+                <a href="/event-details.html?id=${e.id}" class="btn btn-outline-secondary btn-sm flex-grow-1">Details</a>
+                ${e.eventStatus === 'Registration Open' ? `
+                  <button class="btn btn-primary-custom btn-sm flex-grow-1" onclick="registerForEvent('${e.id}')">
+                    <i class="bi bi-ticket-perforated-fill me-1"></i> Register
+                  </button>
+                ` : `
+                  <button class="btn btn-light btn-sm flex-grow-1 text-muted" disabled>Closed</button>
+                `}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

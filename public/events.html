@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse College Events – CampusConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">
+        <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <span>Campus<span class="text-primary">Connect</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2" id="navAuthSection"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <header class="bg-primary text-white py-5">
+    <div class="container text-center">
+      <h1 class="fw-bold display-5">Explore Campus Events</h1>
+      <p class="lead mb-0 text-white-50">Discover technical fests, hackathons, sports championships, workshops, and cultural fests.</p>
+    </div>
+  </header>
+
+  <!-- Filter & Search Controls Bar -->
+  <section class="py-4 bg-white border-bottom shadow-sm">
+    <div class="container">
+      <div class="row g-3 align-items-center">
+        <!-- Search Input -->
+        <div class="col-lg-4">
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" id="eventSearchQuery" class="form-control bg-light border-start-0" placeholder="Search by name, organizer, venue...">
+          </div>
+        </div>
+        <!-- Category Filter -->
+        <div class="col-md-3 col-lg-2">
+          <select id="filterCategory" class="form-select">
+            <option value="All">All Categories</option>
+            <option value="Technical">Technical</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Sports">Sports</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Seminar">Seminar</option>
+            <option value="Hackathon">Hackathon</option>
+            <option value="Competition">Competition</option>
+            <option value="Fest">Fest</option>
+          </select>
+        </div>
+        <!-- Department Filter -->
+        <div class="col-md-3 col-lg-2">
+          <select id="filterDepartment" class="form-select">
+            <option value="All">All Departments</option>
+            <option value="Computer Science & Engineering">Computer Science</option>
+            <option value="Information Technology">Information Tech</option>
+            <option value="Electronics & Communication">Electronics & Comm</option>
+            <option value="Mechanical Engineering">Mechanical</option>
+            <option value="Physical Education Department">Sports & Physical</option>
+          </select>
+        </div>
+        <!-- Status Filter -->
+        <div class="col-md-3 col-lg-2">
+          <select id="filterStatus" class="form-select">
+            <option value="All">All Statuses</option>
+            <option value="Registration Open">Registration Open</option>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Completed">Completed</option>
+            <option value="Registration Closed">Registration Closed</option>
+          </select>
+        </div>
+        <!-- Sorting -->
+        <div class="col-md-3 col-lg-2">
+          <select id="filterSort" class="form-select">
+            <option value="upcoming">Sort: Date (Upcoming)</option>
+            <option value="newest">Sort: Newest Added</option>
+            <option value="most_registered">Sort: Most Registered</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Listing Section -->
+  <main class="py-5 bg-light flex-grow-1">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h5 class="fw-bold mb-0" id="eventsResultCount">Showing events...</h5>
+        <button id="resetFiltersBtn" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters</button>
+      </div>
+
+      <div class="row g-4" id="eventsListContainer">
+        <!-- Rendered by JavaScript -->
+        <div class="col-12 text-center py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center small text-muted">
+      &copy; 2026 CampusConnect – Smart College Event Management System (TAE-I Project).
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    let allEvents = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Check query params e.g. /events.html?category=Technical
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialCat = urlParams.get('category');
+      if (initialCat) {
+        document.getElementById('filterCategory').value = initialCat;
+      }
+
+      await fetchAndRenderEvents();
+
+      // Bind filter events
+      document.getElementById('eventSearchQuery').addEventListener('input', applyClientFilters);
+      document.getElementById('filterCategory').addEventListener('change', fetchAndRenderEvents);
+      document.getElementById('filterDepartment').addEventListener('change', fetchAndRenderEvents);
+      document.getElementById('filterStatus').addEventListener('change', fetchAndRenderEvents);
+      document.getElementById('filterSort').addEventListener('change', fetchAndRenderEvents);
+
+      document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+        document.getElementById('eventSearchQuery').value = '';
+        document.getElementById('filterCategory').value = 'All';
+        document.getElementById('filterDepartment').value = 'All';
+        document.getElementById('filterStatus').value = 'All';
+        document.getElementById('filterSort').value = 'upcoming';
+        fetchAndRenderEvents();
+      });
+    });
+
+    async function fetchAndRenderEvents() {
+      const container = document.getElementById('eventsListContainer');
+      container.innerHTML = `<div class="col-12 text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>`;
+
+      const params = {
+        category: document.getElementById('filterCategory').value,
+        department: document.getElementById('filterDepartment').value,
+        status: document.getElementById('filterStatus').value,
+        sortBy: document.getElementById('filterSort').value,
+        search: document.getElementById('eventSearchQuery').value.trim()
+      };
+
+      try {
+        const res = await api.events.getAll(params);
+        allEvents = res.data;
+        renderEventsGrid(allEvents);
+      } catch (err) {
+        container.innerHTML = `<div class="col-12 text-center py-5 text-danger">Failed to load events.</div>`;
+      }
+    }
+
+    function applyClientFilters() {
+      const q = document.getElementById('eventSearchQuery').value.toLowerCase().trim();
+      const filtered = allEvents.filter(e => 
+        !q ||
+        e.eventName.toLowerCase().includes(q) ||
+        e.organizer.toLowerCase().includes(q) ||
+        e.venue.toLowerCase().includes(q) ||
+        e.description.toLowerCase().includes(q)
+      );
+      renderEventsGrid(filtered);
+    }
+
+    function renderEventsGrid(events) {
+      const container = document.getElementById('eventsListContainer');
+      const countEl = document.getElementById('eventsResultCount');
+      countEl.innerText = `Showing ${events.length} Event${events.length === 1 ? '' : 's'}`;
+
+      if (events.length === 0) {
+        container.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="bi bi-calendar-x fs-1 text-muted"></i>
+            <h5 class="mt-3 text-muted">No events found</h5>
+            <p class="text-muted">Try adjusting your search terms or filter criteria.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = events.map(e => `
+        <div class="col-md-6 col-lg-4">
+          <div class="card custom-card h-100 d-flex flex-column">
+            <div class="card-img-wrapper">
+              <img src="${e.eventImage || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'}" alt="${e.eventName}">
+              <div class="card-img-badge">${getStatusBadge(e.eventStatus)}</div>
+            </div>
+            <div class="card-body d-flex flex-column p-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                ${getCategoryBadge(e.category)}
+                <span class="small text-muted"><i class="bi bi-calendar3 me-1"></i>${formatDate(e.date)}</span>
+              </div>
+              <h5 class="card-title fw-bold mb-2">${e.eventName}</h5>
+              <p class="card-text small text-muted flex-grow-1" style="max-height: 48px; overflow: hidden;">${e.description}</p>
+              
+              <div class="d-flex justify-content-between align-items-center text-muted small mt-3 pt-2 border-top">
+                <span class="text-truncate" style="max-width: 60%;"><i class="bi bi-geo-alt me-1"></i>${e.venue}</span>
+                <span><i class="bi bi-people me-1"></i>${e.currentRegistrations || 0}/${e.maxCapacity}</span>
+              </div>
+              <div class="mt-3">
+                <a href="/event-details.html?id=${e.id}" class="btn btn-outline-primary w-100 fw-semibold">View Details & Register</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

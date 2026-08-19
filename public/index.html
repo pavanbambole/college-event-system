@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusConnect – Smart College Event Management and Student Engagement System</title>
+  <!-- Google Fonts & Bootstrap 5 & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-primary text-white text-center py-2 small fw-semibold">
+    <i class="bi bi-megaphone-fill me-2"></i> Apex Institute Annual TechFest & Hackathon Registrations Are Now Live!
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">
+        <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+        <span>Campus<span class="text-primary">Connect</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/events.html">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2" id="navAuthSection">
+          <!-- Populated dynamically by main.js -->
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section text-center text-lg-start">
+    <div class="container">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <span class="badge bg-primary-subtle text-primary fw-bold px-3 py-2 rounded-pill mb-3">
+            <i class="bi bi-stars me-1"></i> #1 College Event Portal
+          </span>
+          <h1 class="display-4 fw-extrabold mb-3">
+            Discover, Register & <span class="text-gradient">Experience</span> Campus Life
+          </h1>
+          <p class="lead text-muted mb-4">
+            CampusConnect is the ultimate unified digital platform for technical fests, hackathons, workshops, cultural nights, and sporting tournaments at Apex Institute.
+          </p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+            <a href="/events.html" class="btn btn-primary-custom btn-lg">
+              <i class="bi bi-compass me-2"></i>Explore Events
+            </a>
+            <a href="/student-register.html" class="btn btn-secondary-custom btn-lg">
+              <i class="bi bi-person-plus me-2"></i>Register Now
+            </a>
+          </div>
+          <div class="d-flex align-items-center gap-4 mt-4 pt-2 text-muted small justify-content-center justify-content-lg-start">
+            <div><i class="bi bi-check2-circle text-success me-1"></i> Instant Digital Pass</div>
+            <div><i class="bi bi-check2-circle text-success me-1"></i> Live Seat Tracking</div>
+            <div><i class="bi bi-check2-circle text-success me-1"></i> Official Certificates</div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80" alt="Campus Life" class="img-fluid rounded-4 shadow-lg border">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Statistics Counter -->
+  <section class="py-5 bg-white border-top border-bottom">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3">
+          <div class="p-3">
+            <div class="display-5 fw-bold text-primary mb-1">25+</div>
+            <div class="text-muted fw-semibold">Annual Events</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-3">
+            <div class="display-5 fw-bold text-info mb-1">1000+</div>
+            <div class="text-muted fw-semibold">Active Students</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-3">
+            <div class="display-5 fw-bold text-success mb-1">750+</div>
+            <div class="text-muted fw-semibold">Registrations</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="p-3">
+            <div class="display-5 fw-bold text-warning mb-1">20+</div>
+            <div class="text-muted fw-semibold">Clubs & Organizers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured & Upcoming Events Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+        <div>
+          <span class="text-primary fw-bold text-uppercase small">What's Happening</span>
+          <h2 class="fw-bold mb-1">Featured Upcoming Events</h2>
+          <p class="text-muted mb-0">Don't miss out on the top events happening on campus this semester.</p>
+        </div>
+        <div class="mt-3 mt-md-0">
+          <a href="/events.html" class="btn btn-outline-primary fw-semibold">View All Events <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+
+      <div class="row g-4" id="homeFeaturedEventsGrid">
+        <!-- Loaded via JavaScript -->
+        <div class="col-12 text-center py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Event Categories Grid -->
+  <section class="py-5 bg-light border-top">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="text-primary fw-bold text-uppercase small">Categories</span>
+        <h2 class="fw-bold">Explore by Category</h2>
+        <p class="text-muted">Find activities matching your passion—from competitive coding to high-energy cultural dance.</p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Technical" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-primary mb-2"><i class="bi bi-laptop"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Technical</h6>
+            <span class="small text-muted">Hackathons & Coding</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Cultural" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-danger mb-2"><i class="bi bi-music-note-beamed"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Cultural</h6>
+            <span class="small text-muted">Dance, Music & Drama</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Workshop" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-success mb-2"><i class="bi bi-tools"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Workshops</h6>
+            <span class="small text-muted">Hands-on Masterclasses</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Sports" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-warning mb-2"><i class="bi bi-trophy"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Sports</h6>
+            <span class="small text-muted">Inter-College Tournaments</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Hackathon" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-info mb-2"><i class="bi bi-code-slash"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Hackathons</h6>
+            <span class="small text-muted">36-Hour Sprints</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Seminar" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-secondary mb-2"><i class="bi bi-easel2"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Seminars</h6>
+            <span class="small text-muted">AI & Cloud Expert Talks</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Competition" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-purple mb-2"><i class="bi bi-award"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Competitions</h6>
+            <span class="small text-muted">Project Expos & Arts</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3">
+          <a href="/events.html?category=Fest" class="card custom-card text-center p-4 h-100 text-decoration-none">
+            <div class="fs-1 text-primary mb-2"><i class="bi bi-stars"></i></div>
+            <h6 class="fw-bold text-dark mb-1">Grand Fests</h6>
+            <span class="small text-muted">Campus Celebrations</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="text-primary fw-bold text-uppercase small">Simple & Seamless</span>
+        <h2 class="fw-bold">How CampusConnect Works</h2>
+        <p class="text-muted">Registering for college activities has never been simpler.</p>
+      </div>
+
+      <div class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light h-100 border">
+            <div class="stat-icon-box bg-primary text-white mx-auto mb-3">1</div>
+            <h5 class="fw-bold">Create Student Account</h5>
+            <p class="text-muted small">Sign up using your college student ID and department credentials in seconds.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light h-100 border">
+            <div class="stat-icon-box bg-info text-white mx-auto mb-3">2</div>
+            <h5 class="fw-bold">Browse & 1-Click Register</h5>
+            <p class="text-muted small">Filter upcoming events, check venue and seat capacity, and confirm your registration.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-4 bg-light h-100 border">
+            <div class="stat-icon-box bg-success text-white mx-auto mb-3">3</div>
+            <h5 class="fw-bold">Download Pass & Attend</h5>
+            <p class="text-muted small">Get your personalized digital ticket pass, attend the event, and submit reviews!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Testimonials -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="text-primary fw-bold text-uppercase small">Student Voices</span>
+        <h2 class="fw-bold">What Our Students Say</h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card custom-card p-4 h-100">
+            <div class="mb-3 text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="text-muted italic">"CampusConnect made registration for the 36-hour CodeSprint hackathon painless! Got my ticket code instantly."</p>
+            <div class="d-flex align-items-center gap-3 mt-auto pt-3 border-top">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">AS</div>
+              <div>
+                <h6 class="fw-bold mb-0">Aarav Sharma</h6>
+                <small class="text-muted">CSE, 3rd Year</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card custom-card p-4 h-100">
+            <div class="mb-3 text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="text-muted italic">"Managing registrations and getting event reminders right on my student dashboard saved so much time!"</p>
+            <div class="d-flex align-items-center gap-3 mt-auto pt-3 border-top">
+              <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">PP</div>
+              <div>
+                <h6 class="fw-bold mb-0">Priya Patel</h6>
+                <small class="text-muted">IT, 2nd Year</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card custom-card p-4 h-100">
+            <div class="mb-3 text-warning"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+            <p class="text-muted italic">"The project expo portal allowed our robotics team to showcase prototypes seamlessly to external jury."</p>
+            <div class="d-flex align-items-center gap-3 mt-auto pt-3 border-top">
+              <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">RV</div>
+              <div>
+                <h6 class="fw-bold mb-0">Rohan Verma</h6>
+                <small class="text-muted">ECE, 3rd Year</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-primary text-white text-center">
+    <div class="container py-4">
+      <h2 class="display-6 fw-bold mb-3">Ready to Be Part of the Next Big Campus Event?</h2>
+      <p class="lead mb-4 text-white-50">Join thousands of students registering for workshops, cultural nights, and fests.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="/student-register.html" class="btn btn-light btn-lg fw-bold text-primary px-4">Get Started Free</a>
+        <a href="/events.html" class="btn btn-outline-light btn-lg fw-bold px-4">Browse Calendar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="brand-icon"><i class="bi bi-mortarboard-fill"></i></div>
+            <h5 class="text-white fw-bold mb-0">CampusConnect</h5>
+          </div>
+          <p class="small text-muted">Smart College Event Management and Student Engagement System built for Final Year Engineering TAE-I Evaluation.</p>
+          <div class="d-flex gap-3 fs-5">
+            <a href="#"><i class="bi bi-github"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+            <a href="#"><i class="bi bi-globe"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="text-white fw-bold mb-3">Navigation</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="/index.html">Home</a></li>
+            <li class="mb-2"><a href="/events.html">All Events</a></li>
+            <li class="mb-2"><a href="/about.html">About Us</a></li>
+            <li class="mb-2"><a href="/contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Student & Admin</h6>
+          <ul class="list-unstyled small">
+            <li class="mb-2"><a href="/student-login.html">Student Portal</a></li>
+            <li class="mb-2"><a href="/student-register.html">New Student Signup</a></li>
+            <li class="mb-2"><a href="/admin-login.html">Administrator Login</a></li>
+            <li class="mb-2"><a href="/about.html#architecture">System Architecture</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <h6 class="text-white fw-bold mb-3">Apex Institute</h6>
+          <p class="small text-muted mb-1"><i class="bi bi-geo-alt me-2"></i>Campus Quad, Knowledge Park, India</p>
+          <p class="small text-muted mb-1"><i class="bi bi-envelope me-2"></i>events@campusconnect.edu</p>
+          <p class="small text-muted"><i class="bi bi-telephone me-2"></i>+91 (0) 120 456 7890</p>
+        </div>
+      </div>
+      <div class="pt-3 border-top border-secondary text-center small text-muted">
+        &copy; 2026 CampusConnect – Smart College Event Management System. All Rights Reserved. (TAE-I Project).
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    // Load Featured Events onto Home Page
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await api.events.getAll({ sortBy: 'upcoming' });
+        const events = res.data.slice(0, 6);
+        const container = document.getElementById('homeFeaturedEventsGrid');
+        if (!container) return;
+
+        if (events.length === 0) {
+          container.innerHTML = `<div class="col-12 text-center text-muted">No events currently scheduled.</div>`;
+          return;
+        }
+
+        container.innerHTML = events.map(e => `
+          <div class="col-md-6 col-lg-4">
+            <div class="card custom-card h-100 d-flex flex-column">
+              <div class="card-img-wrapper">
+                <img src="${e.eventImage || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80'}" alt="${e.eventName}">
+                <div class="card-img-badge">${getStatusBadge(e.eventStatus)}</div>
+              </div>
+              <div class="card-body d-flex flex-column p-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  ${getCategoryBadge(e.category)}
+                  <span class="small text-muted"><i class="bi bi-calendar3 me-1"></i>${formatDate(e.date)}</span>
+                </div>
+                <h5 class="card-title fw-bold mb-2">${e.eventName}</h5>
+                <p class="card-text small text-muted flex-grow-1" style="max-height: 48px; overflow: hidden;">${e.description}</p>
+                
+                <div class="d-flex justify-content-between align-items-center text-muted small mt-3 pt-2 border-top">
+                  <span><i class="bi bi-geo-alt me-1"></i>${e.venue}</span>
+                  <span><i class="bi bi-people me-1"></i>${e.currentRegistrations || 0}/${e.maxCapacity}</span>
+                </div>
+                <div class="mt-3">
+                  <a href="/event-details.html?id=${e.id}" class="btn btn-outline-primary w-100 fw-semibold">View Details & Register</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error('Home events load error:', err);
+      }
+    });
+  </script>
+</body>
+</html>
