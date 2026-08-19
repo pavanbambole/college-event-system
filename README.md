@@ -202,8 +202,6 @@ Administrators can:
 | Version Control | Git & GitHub |
 
 ---
-
-
 # 🏗️ System Architecture
 
 ```mermaid
@@ -222,9 +220,6 @@ graph TD
     D --> E
     E --> F
     F --> G
-    D --> E
-    E --> F
-    F --> 
 
 # 📂 Project Structure
 
