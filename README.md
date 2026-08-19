@@ -225,6 +225,74 @@ G["JSON Data Store"]
 A --> B
 B --> C
 C --> D
+
+
+
+# 📂 Project Structure
+
+S-B-JAIN-College-Event-Management-System/
+│
+├── data/
+│   ├── admins.json
+│   ├── events.json
+│   ├── feedback.json
+│   ├── registrations.json
+│   └── students.json
+│
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   │
+│   ├── js/
+│   │   ├── admin.js
+│   │   ├── api.js
+│   │   ├── auth.js
+│   │   ├── main.js
+│   │   └── student.js
+│   │
+│   ├── index.html
+│   ├── about.html
+│   ├── events.html
+│   ├── event-details.html
+│   ├── contact.html
+│   ├── student-login.html
+│   ├── student-register.html
+│   ├── student-dashboard.html
+│   ├── student-profile.html
+│   ├── student-events.html
+│   ├── my-registrations.html
+│   ├── event-history.html
+│   ├── feedback.html
+│   ├── settings.html
+│   ├── admin-login.html
+│   ├── admin-dashboard.html
+│   ├── manage-events.html
+│   ├── add-event.html
+│   ├── edit-event.html
+│   ├── manage-students.html
+│   ├── manage-registrations.html
+│   ├── event-analytics.html
+│   ├── manage-feedback.html
+│   ├── 404.html
+│   └── access-denied.html
+│
+├── server/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── routes/
+│   ├── utils/
+│   └── server.js
+│
+├── tests/
+│   └── api_test.js
+│
+├── .env.example
+├── .gitignore
+├── package.json
+├── render.yaml
+├── DOCUMENTATION.md
+├── VIVA_QUESTIONS.md
+└── README.md
 D --> E
 E --> F
 F --> G
