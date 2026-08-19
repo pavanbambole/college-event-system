@@ -204,28 +204,24 @@ Administrators can:
 ---
 
 # 🏗️ System Architecture
+# 🏗️ System Architecture
 
 ```mermaid
 graph TD
+    A["Student / Admin Browser"]
+    B["Frontend - HTML CSS Bootstrap JavaScript"]
+    C["Express.js REST API"]
+    D["Authentication Middleware - JWT"]
+    E["Controllers"]
+    F["JSON Database Engine"]
+    G["JSON Data Store"]
 
-A["Student / Admin Browser"]
-
-B["Frontend<br>HTML + CSS + Bootstrap + JavaScript"]
-
-C["Express.js REST API"]
-
-D["Authentication Middleware<br>JWT + Role Authorization"]
-
-E["Controllers<br>Auth / Events / Registrations / Students / Feedback"]
-
-F["JSON Database Engine"]
-
-G["JSON Data Store"]
-
-A --> B
-B --> C
-C --> D
-
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
 
 
 # 📂 Project Structure
